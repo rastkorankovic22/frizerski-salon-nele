@@ -1,0 +1,23 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./nele.db"
+}
+
+model Booking {
+  id          String   @id @default(cuid())
+  date        String
+  time        String
+  clientName  String
+  clientPhone String
+  clientEmail String?
+  service     String   @default("Haircut")
+  status      String   @default("pending")
+  notes       String?
+  createdAt   DateTime @default(now())
+
+  @@unique([date, time], name: "date_time")
+}
